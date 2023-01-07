@@ -50,31 +50,33 @@ export default function ChartSingle() {
     }
 
     return (
-        <Container className="py-10">
-            <h1 className="text-3xl font-bold">{meta.title}</h1>
-            <div className="h-4"></div>
-            <div className="flex items-center justify-between mb-4">
-                <div></div>
-                <div className="flex space-x-2 bg-gray-800 p-2 rounded-md">
-                    <Button onClick={saveWork}>
-                        {saveWorkStatus === 'loading' ? (
-                            <ArrowPathIcon className="w-5 h-5 animate-spin"></ArrowPathIcon>
-                        ) : (
-                            <FolderPlusIcon className="w-5 h-5"></FolderPlusIcon>
-                        )}
-                        <span>Save work</span>
-                    </Button>
-                    <Button onClick={exportData}>
-                        {exportDataStatus === 'loading' ? (
-                            <ArrowPathIcon className="w-5 h-5 animate-spin"></ArrowPathIcon>
-                        ) : (
-                            <ArrowDownTrayIcon className="w-5 h-5"></ArrowDownTrayIcon>
-                        )}
-                        <span>Export</span>
-                    </Button>
+        <>
+            <Container className="py-10">
+                <div className="flex items-center justify-between mb-0">
+                    <div>
+                        <h1 className="text-3xl font-bold">{meta.title}</h1>
+                    </div>
+                    <div className="flex space-x-2 bg-gray-800 p-2 rounded-md">
+                        <Button onClick={saveWork}>
+                            {saveWorkStatus === 'loading' ? (
+                                <ArrowPathIcon className="w-5 h-5 animate-spin"></ArrowPathIcon>
+                            ) : (
+                                <FolderPlusIcon className="w-5 h-5"></FolderPlusIcon>
+                            )}
+                            <span>Save work</span>
+                        </Button>
+                        <Button onClick={exportData}>
+                            {exportDataStatus === 'loading' ? (
+                                <ArrowPathIcon className="w-5 h-5 animate-spin"></ArrowPathIcon>
+                            ) : (
+                                <ArrowDownTrayIcon className="w-5 h-5"></ArrowDownTrayIcon>
+                            )}
+                            <span>Export</span>
+                        </Button>
+                    </div>
                 </div>
-            </div>
-            {/* <PreCode>{JSON.stringify(chartData, null, 2)}</PreCode> */}
+                {/* <PreCode>{JSON.stringify(chartData, null, 2)}</PreCode> */}
+            </Container>
             <div className="bg-gray-800 rounded-lg w-full overflow-hidden border border-gray-800 shadow-md">
                 <Chart
                     candles={candles}
@@ -82,6 +84,6 @@ export default function ChartSingle() {
                     handleClick={handleCandleClick}
                 />
             </div>
-        </Container>
+        </>
     );
 }

@@ -58,19 +58,21 @@ function FormNewItem({ handleItemAdded }) {
             const result = Papa.parse(csv, { header: true });
 
             const { data } = result;
-            const candles = data.map((item) => {
-                // remove possible spaces in all keys
-                Object.keys(item).forEach((key) => {
-                    item[key.replace(/\s/g, '')] = item[key];
+            const candles = data
+                .filter((item) => item.time)
+                .map((item) => {
+                    // remove possible spaces in all keys
+                    Object.keys(item).forEach((key) => {
+                        item[key.replace(/\s/g, '')] = item[key];
+                    });
+                    return {
+                        time: new Date(parseInt(item.time, 10)).getTime(),
+                        open: parseFloat(item.open),
+                        high: parseFloat(item.high),
+                        low: parseFloat(item.low),
+                        close: parseFloat(item.close)
+                    };
                 });
-                return {
-                    time: new Date(parseInt(item.time, 10)).getTime(),
-                    open: parseFloat(item.open),
-                    high: parseFloat(item.high),
-                    low: parseFloat(item.low),
-                    close: parseFloat(item.close)
-                };
-            });
             const markers = data.map((item) => {
                 return {
                     time: new Date(parseInt(item.time, 10)).getTime(),

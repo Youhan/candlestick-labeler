@@ -7,11 +7,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import localforage from 'localforage';
-import ChartListItem from '../components/ChartListItem';
-import PreCode from '../components/PreCode';
 import { Button } from '../components/Button';
 import FormNewItem from './FormNewItem';
-import { format } from 'date-fns';
 
 export function ListChartItems() {
     const [chartItems, setChartItems] = useState([]);
@@ -36,22 +33,6 @@ export function ListChartItems() {
     useEffect(() => {
         loadItems();
     }, []);
-
-    const formatDate = (time) => {
-        return new Intl.DateTimeFormat('en-US').format(new Date(time));
-    };
-    const getFromDate = (item) => {
-        const time = parseInt(item.data.candles[0].time * 1000, 10);
-        return formatDate(time);
-    };
-
-    const getToDate = (item) => {
-        const time = parseInt(
-            item.data.candles[item.data.candles.length - 1].time * 1000,
-            10
-        );
-        return formatDate(time);
-    };
 
     /**
      * Get the id from the item and delete it from localforage
@@ -109,12 +90,6 @@ export function ListChartItems() {
                                     >
                                         {chartItem.meta.title}
                                     </Link>
-                                    <div className="text-sm dark:text-gray-500">
-                                        <span>
-                                            {getFromDate(chartItem)} -{' '}
-                                            {getToDate(chartItem)}
-                                        </span>
-                                    </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <Button

@@ -16,7 +16,7 @@ function Chart({ candles, markers, handleClick }) {
 
         const chart = createChart(chartContainerRef.current, {
             width: chartContainerRef.current.clientWidth,
-            height: 500,
+            height: 800,
             layout: {
                 backgroundColor: '#131722',
                 lineColor: '#2B2B43',
